@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using AnaSProject.Services;
 
 namespace AnaSProject
 {
@@ -16,6 +17,7 @@ namespace AnaSProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<IMailService, NullMailService>();//Just test purposes for this assessment
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

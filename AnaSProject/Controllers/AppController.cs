@@ -23,6 +23,11 @@ namespace AnaSProject.Controllers
             return View();
         }
 
+        public IActionResult Shop()
+        {
+            return View();
+        }
+
         [HttpGet("contact")]
         public IActionResult Contact()
         {

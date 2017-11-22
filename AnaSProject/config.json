@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "AnaSConnectionString": "server=(localdb)\\MSSQLLocalDB;Database=sana_assessment;Integrated Security=true; MultipleActiveResultSets=true;"
+  }
+}

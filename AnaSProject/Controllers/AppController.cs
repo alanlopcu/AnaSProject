@@ -12,5 +12,15 @@ namespace AnaSProject.Controllers
         public IActionResult Index() {
             return View();
         }
+
+        public IActionResult Contact() {
+            ViewBag.Title = "Contact Me";
+            return View();
+        }
+
+        public IActionResult About() {
+            ViewBag.Title = "About Me";
+            return View();
+        }
     }
 }

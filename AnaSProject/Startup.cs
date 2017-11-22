@@ -24,7 +24,11 @@ namespace AnaSProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }                
+            }
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
             //app.UseDefaultFiles();
             app.UseStaticFiles();
 

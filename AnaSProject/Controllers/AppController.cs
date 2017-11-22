@@ -9,18 +9,26 @@ namespace AnaSProject.Controllers
 {
     public class AppController : Controller
     {
-        public IActionResult Index() {
+        public IActionResult Index()
+        {
             return View();
         }
 
         [HttpGet("contact")]
-        public IActionResult Contact() {
-            ViewBag.Title = "Contact Me";
+        public IActionResult Contact()
+        {
             return View();
         }
 
-        public IActionResult About() {
-            ViewBag.Title = "About Me";
+        [HttpPost("contact")]
+        public IActionResult Contact(object model)
+        {
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            //ViewBag.Title = "About Me";
             return View();
         }
     }

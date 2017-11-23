@@ -7,6 +7,10 @@ namespace AnaSProject.Data
     {
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> GetProductsByCategory(int categoryId);
+
+        IEnumerable<Order> GetAllOrders();
+        Order GetOrderById(int id);
+
         bool SaveChanges();
     }
 }

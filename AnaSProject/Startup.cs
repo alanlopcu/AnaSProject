@@ -10,6 +10,7 @@ using AnaSProject.Services;
 using AnaSProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace AnaSProject
 {
@@ -26,7 +27,8 @@ namespace AnaSProject
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);//Handling my Json error
             services.AddDbContext<AnaSContext>(cfg => {
                 cfg.UseSqlServer(_config.GetConnectionString("AnaSConnectionString"));
             });

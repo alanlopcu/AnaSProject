@@ -27,16 +27,18 @@ namespace AnaSProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<IMailService, NullMailService>();//Just test purposes for this assessment
             services.AddDbContext<AnaSContext>(cfg => {
                 cfg.UseSqlServer(_config.GetConnectionString("AnaSConnectionString"));
             });
+            services.AddTransient<AnaSSeeder>();
+            services.AddScoped<IAnaSRepository, AnaSRepository>();//Playing with my repository pattern
+            services.AddTransient<IMailService, NullMailService>();//Just my own core test purposes
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment())//Testing purposes
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -54,6 +56,16 @@ namespace AnaSProject
                     "{controller}/{action}/{id?}",
                     new { controller = "App", Action = "Index" });
             });
+
+            if (env.IsDevelopment())//This assessment environment at this point
+            {
+                //Seed my assessment data
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var seeder = scope.ServiceProvider.GetService<AnaSSeeder>();
+                    seeder.Seed();
+                }
+            }
         }
     }
 }

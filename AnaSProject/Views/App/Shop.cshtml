@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewBag.Title = "My Shop";
+}
+
+<h1>Shop</h1>
+<p>Count: @Model.Count()</p>
+
+@foreach(var p in Model)
+{
+    <div class="col-md-4">
+        <div class="well well-sm">
+            <img class="img-responsive" src="~/img/@p.Picture" alt="@p.Title"/>
+            <h3>@p.Title</h3>
+            <ul class="product-props">
+                <li>Price: @p.Price</li>
+                <li>Category: @p.Category</li>
+                <li>Description: @p.Description</li>
+            </ul>
+            <button id="buyButton" class="btn btn-default">Buy!</button>
+        </div>
+    </div>
+}

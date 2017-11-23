@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AnaSProject.ViewModels;
 using AnaSProject.Services;
+using AnaSProject.Data;
 
 namespace AnaSProject.Controllers
 {
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
+        private readonly IAnaSRepository _repository;
 
-        public AppController(IMailService mailService)
+        public AppController(IMailService mailService, IAnaSRepository repository)
         {
             _mailService = mailService;
+            _repository = repository;
         }
 
         public IActionResult Index()
@@ -25,7 +28,17 @@ namespace AnaSProject.Controllers
 
         public IActionResult Shop()
         {
-            return View();
+            var results = _repository.GetAllProducts();
+            //var results = _context.Products
+            //    .OrderBy(p => p.Category)
+            //    .ToList();
+
+            //var results = from p in _context.Products
+            //              orderby p.Category
+            //              select p;
+
+            //return View(results.ToList());
+            return View(results);
         }
 
         [HttpGet("contact")]

@@ -29,15 +29,6 @@ namespace AnaSProject.Controllers
         public IActionResult Shop()
         {
             var results = _repository.GetAllProducts();
-            //var results = _context.Products
-            //    .OrderBy(p => p.Category)
-            //    .ToList();
-
-            //var results = from p in _context.Products
-            //              orderby p.Category
-            //              select p;
-
-            //return View(results.ToList());
             return View(results);
         }
 
@@ -59,14 +50,13 @@ namespace AnaSProject.Controllers
             }
             else
             {
-                //Show the errors
+                //Show errors
             }
             return View();
         }
 
         public IActionResult About()
         {
-            //ViewBag.Title = "About Me";
             return View();
         }
     }

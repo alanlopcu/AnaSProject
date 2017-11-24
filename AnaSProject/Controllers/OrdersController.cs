@@ -1,4 +1,7 @@
 ﻿using AnaSProject.Data;
+using AnaSProject.Data.Entities;
+using AnaSProject.ViewModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,10 +15,12 @@ namespace AnaSProject.Controllers
     public class OrdersController : Controller
     {
         private readonly IAnaSRepository _repository;
+        private readonly IMapper _mapper;
 
-        public OrdersController(IAnaSRepository repository)
+        public OrdersController(IAnaSRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -23,7 +28,7 @@ namespace AnaSProject.Controllers
         {
             try
             {
-                return Ok(_repository.GetAllOrders());
+                return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(_repository.GetAllOrders()));
             }
             catch (Exception ex)
             {
@@ -36,14 +41,46 @@ namespace AnaSProject.Controllers
         {
             try
             {
-                var Order = _repository.GetOrderById(id);
-                if (Order != null) return Ok(Order);
+                var order = _repository.GetOrderById(id);
+                if (order != null) return Ok(_mapper.Map<Order, OrderViewModel>(order));
                 else return NotFound();
             }
             catch (Exception ex)
             {
-                return BadRequest("Error getting Orders: " + ex.Message);
+                return BadRequest("Error getting Order: " + ex.Message);
             }
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]OrderViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var newOrder = _mapper.Map<OrderViewModel, Order>(model);
+
+                    if (newOrder.OrderDate == DateTime.MinValue)
+                        newOrder.OrderDate = DateTime.Now;
+
+                    _repository.AddEntity(newOrder);
+
+                    if (_repository.SaveChanges())
+                    {
+                        return Created($"/api/orders/{newOrder.OrderId}", _mapper.Map<Order, OrderViewModel>(newOrder));
+                    }                        
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO
+                return BadRequest("Error saving: " + ex.Message);
+            }
+            return BadRequest("Error saving...");
         }
     }
 }

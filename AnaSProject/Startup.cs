@@ -11,6 +11,7 @@ using AnaSProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using AutoMapper;
 
 namespace AnaSProject
 {
@@ -32,6 +33,7 @@ namespace AnaSProject
             services.AddDbContext<AnaSContext>(cfg => {
                 cfg.UseSqlServer(_config.GetConnectionString("AnaSConnectionString"));
             });
+            services.AddAutoMapper();//Including Auto Mapping Support
             services.AddTransient<AnaSSeeder>();
             services.AddScoped<IAnaSRepository, AnaSRepository>();//Playing with my repository pattern
             services.AddTransient<IMailService, NullMailService>();//Just my own core test purposes

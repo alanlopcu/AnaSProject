@@ -28,8 +28,7 @@ namespace AnaSProject.Controllers
 
         public IActionResult Shop()
         {
-            var results = _repository.GetAllProducts();
-            return View(results);
+            return View();
         }
 
         [HttpGet("contact")]

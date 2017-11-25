@@ -1,0 +1,14 @@
+﻿.product-info {
+    height: 250px;
+}
+    .product-info img {
+        max-width: 100px;
+        float: left;
+        margin: 0 2px;
+        border: solid 1px black;
+    }
+
+    .product-info .product-title {
+        font-size: large;
+        font-weight: bold;
+    }

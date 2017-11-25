@@ -60,7 +60,7 @@ namespace AnaSProject.Data
         public IEnumerable<Order> GetAllOrders()
         {
             return _context.Orders
-                //.Include(c => c.Customer)
+                .Include(c => c.Customer)
                 .Include(o => o.Items)
                 .ThenInclude(i => i.Product)
                 .ToList();
@@ -79,14 +79,14 @@ namespace AnaSProject.Data
         /*--- Customers Operations ---*/
         public IEnumerable<Customer> GetAllCustomers()
         {
-            return _context.Customers
+            return _context.Customer
                 .OrderBy(c => c.FullName)
                 .ToList();
         }
 
         public Customer GetCustomerById(int id)
         {
-            return _context.Customers
+            return _context.Customer
                 .Where(c => c.CustomerId == id)
                 .FirstOrDefault();
         }

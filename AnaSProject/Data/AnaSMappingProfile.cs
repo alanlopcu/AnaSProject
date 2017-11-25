@@ -14,14 +14,16 @@ namespace AnaSProject.Data
         public AnaSMappingProfile()
         {
             CreateMap<Product, ProductViewModel>()
+                .ForMember(c => c.CategoryId, ex => ex.MapFrom(o => o.Category.CategoryId))
                 .ReverseMap()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Order, OrderViewModel>()
+                .ForMember(c => c.CustomerId, ex => ex.MapFrom(o => o.Customer.CustomerId))
                 .ReverseMap();
-            //ForMember(o => o.OrderId, ex => ex.MapFrom(o => o.[My original variable]));//Changed before
 
             CreateMap<OrderItem, OrderItemViewModel>()
+                .ForMember(p => p.ProductId, ex => ex.MapFrom(o => o.Product.ProductId))
                 .ReverseMap();
 
             CreateMap<Customer, CustomerViewModel>()

@@ -24,7 +24,7 @@ namespace AnaSProject.Data
         public void Seed()
         {
             _context.Database.EnsureCreated();//Check if database exists
-            if (!_context.Products.Any() && !_context.Categories.Any() && !_context.Customers.Any() && !_context.Orders.Any())//First time for this assessment
+            if (!_context.Products.Any() && !_context.Categories.Any() && !_context.Customer.Any() && !_context.Orders.Any())//First time for this assessment
             {
                 //I need to insert some data
                 //Lets add two random categories
@@ -63,9 +63,9 @@ namespace AnaSProject.Data
                     PhoneNumber = "390312575",
                     Identity = "Unknown"
                 };
-                _context.Customers.Add(customer1);
-                _context.Customers.Add(customer2);
-                _context.Customers.Add(customer3);
+                _context.Customer.Add(customer1);
+                _context.Customer.Add(customer2);
+                _context.Customer.Add(customer3);
 
                 //Products list from my json previously created using my database design. Note: Some categories are not correct at this moment.
                 var filepath = Path.Combine(_hosting.ContentRootPath, "Data/Migrations/sanac_seed_products.json");

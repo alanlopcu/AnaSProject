@@ -5,6 +5,7 @@
     <AssemblyName>AnaSProject</AssemblyName>
     <RootNamespace>AnaSProject</RootNamespace>
     <StartupObject></StartupObject>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>

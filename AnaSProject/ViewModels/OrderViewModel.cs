@@ -9,12 +9,15 @@ namespace AnaSProject.ViewModels
 {
     public class OrderViewModel
     {
-        //[Required]
+        [Required]
         public CustomerViewModel Customer { get; set; }
         public DateTime OrderDate { get; set; }
         [Required, MinLength(4)]
         public string OrderNumber { get; set; }
 
         public ICollection<OrderItemViewModel> Items { get; set; }
+
+        [Required]
+        public int CustomerId { get; set; }
     }
 }

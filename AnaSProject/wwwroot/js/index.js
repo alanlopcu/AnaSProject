@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
-    console.log("Hello World!");
+    console.log("Sana Assessment ASP.NET Senior Developer");
+    console.log("Alvaro Andrés López C.");
 
     var theForm = $("#theForm");
     theForm.hide();

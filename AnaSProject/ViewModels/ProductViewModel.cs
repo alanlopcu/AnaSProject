@@ -4,6 +4,7 @@ namespace AnaSProject.ViewModels
 {
     public class ProductViewModel
     {
+        public int ProductId { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required, MinLength(4)]
@@ -13,7 +14,8 @@ namespace AnaSProject.ViewModels
 
         public CategoryViewModel Category { get; set; }
 
-        //public int CategoryId { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
         //public string CategoryName { get; set; }
         //public string CategoryDescription { get; set; }
     }

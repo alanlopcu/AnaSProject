@@ -1,10 +1,26 @@
 ﻿@model IEnumerable<Product>
 @{
-    ViewBag.Title = "My Shop";
+    ViewBag.Title = "Sana WebShop";
+}
+@section Scripts{ 
+<script src="~/ClientSide/dist/inline.bundle.js"></script>
+<script src="~/ClientSide/dist/polyfills.bundle.js"></script>
+<script src="~/ClientSide/dist/styles.bundle.js"></script>
+<script src="~/ClientSide/dist/vendor.bundle.js"></script>
+<script src="~/ClientSide/dist/main.bundle.js"></script>
 }
 
 <h1>Shop</h1>
-<p>Count: @Model.Count()</p>
+<sana-webshop></sana-webshop>
+
+@*@{
+    ViewBag.Title = "My Shop";
+}*@
+
+@*<h1>Shop</h1>*@
+
+
+@*<p>Count: @Model.Count()</p>
 
 @foreach(var p in Model)
 {
@@ -20,4 +36,4 @@
             <button id="buyButton" class="btn btn-default">Buy!</button>
         </div>
     </div>
-}
+}*@

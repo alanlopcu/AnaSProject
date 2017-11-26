@@ -46,6 +46,11 @@ var DataService = (function () {
             this.order.items.push(item);
         }
     };
+    DataService.prototype.addProduct = function (prod) {
+        this.products = this.persistenceService.get('productList', angular_persistence_1.StorageType.LOCAL); //Clean DB product list & load my memory storage product list
+        this.products.push(prod); //add my new product
+        this.persistenceService.set('productList', this.products, { type: angular_persistence_1.StorageType.LOCAL }); //Memory & 'offline' storage
+    };
     DataService.prototype.insertProduct = function (prod) {
         return this.http.post("/api/products", prod)
             .map(function (response) {
@@ -62,7 +67,10 @@ var DataService = (function () {
         this.persistenceService.set('perSwitch', false, { type: angular_persistence_1.StorageType.LOCAL }); //Database storage
     };
     DataService.prototype.getMemoryStorageState = function () {
-        return this.persistenceService.get('perSwitch');
+        return this.persistenceService.get('perSwitch', angular_persistence_1.StorageType.LOCAL);
+    };
+    DataService.prototype.getMemoryStorageProductList = function () {
+        return this.persistenceService.get('productList', angular_persistence_1.StorageType.LOCAL);
     };
     return DataService;
 }());

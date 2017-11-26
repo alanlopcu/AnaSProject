@@ -10,19 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var dataService_1 = require("../shared/dataService");
 var Shop = (function () {
-    function Shop(data) {
+    function Shop(data, router) {
         this.data = data;
+        this.router = router;
         this.msValue = this.data.perSwitch; //Persitent storage by default (I used database)
         this.errorMessage = "";
     }
     Shop.prototype.storageSwClicked = function () {
         console.log("Switch storage value: " + this.msValue);
-        if (this.msValue)
+        if (this.msValue) {
             this.data.activateMemoryStorage();
-        else
+            this.router.navigate(["/"]);
+        }
+        else {
             this.data.deactivateMemoryStorage();
+            this.router.navigate(["/"]);
+        }
     };
     return Shop;
 }());
@@ -31,7 +37,7 @@ Shop = __decorate([
         selector: "sana-shop",
         templateUrl: "shop.component.html"
     }),
-    __metadata("design:paramtypes", [dataService_1.DataService])
+    __metadata("design:paramtypes", [dataService_1.DataService, router_1.Router])
 ], Shop);
 exports.Shop = Shop;
 //# sourceMappingURL=shop.component.js.map

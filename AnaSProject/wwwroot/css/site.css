@@ -1,4 +1,17 @@
-﻿/*body {
+﻿body .navbar-inverse {
+    background-color: #c10c06;
+    border-color: #c10c06;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-inverse .navbar-brand{
+    color: white;
+}
+
+/*body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 

@@ -18,12 +18,17 @@ var ProductList = (function () {
     }
     ProductList.prototype.ngOnInit = function () {
         var _this = this;
-        this.data.loadProducts()
-            .subscribe(function (success) {
-            if (success) {
-                _this.products = _this.data.products;
-            }
-        });
+        if (this.data.getMemoryStorageState()) {
+            this.products = this.data.getMemoryStorageProductList();
+        }
+        else {
+            this.data.loadProducts()
+                .subscribe(function (success) {
+                if (success) {
+                    _this.products = _this.data.products;
+                }
+            });
+        }
     };
     ProductList.prototype.addProduct = function (product) {
         this.data.AddToOrder(product);

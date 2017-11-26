@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using AnaSProject.Services;
 using AnaSProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,8 +34,7 @@ namespace AnaSProject
             });
             services.AddAutoMapper();//Including Auto Mapping Support
             services.AddTransient<AnaSSeeder>();
-            services.AddScoped<IAnaSRepository, AnaSRepository>();//Playing with my repository pattern
-            services.AddTransient<IMailService, NullMailService>();//Just my own core test purposes
+            services.AddScoped<IAnaSRepository, AnaSRepository>();//Repository pattern
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +60,7 @@ namespace AnaSProject
 
             if (env.IsDevelopment())//My assessment environment at this point
             {
-                //Seeding my assessment data
+                //Seeding
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var seeder = scope.ServiceProvider.GetService<AnaSSeeder>();

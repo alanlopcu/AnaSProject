@@ -26,8 +26,10 @@ var NewProduct = (function () {
     }
     NewProduct.prototype.onInsert = function () {
         var _this = this;
-        if (this.data.getMemoryStorageState())
-            console.log("Memory storage activated. You can't write on database!");
+        if (this.data.getMemoryStorageState()) {
+            this.data.addProduct(this.prod);
+            this.router.navigate(["/"]);
+        }
         else {
             this.data.insertProduct(this.prod)
                 .subscribe(function (success) {

@@ -1,7 +1,4 @@
-var StoreCustomer = (function () {
-    function StoreCustomer() {
-        this.visits = 1;
-    }
-    return StoreCustomer;
-}());
+//class StoreCustomer {
+//    public visits: number = 1;
+//} 
 //# sourceMappingURL=storecustomer.js.map

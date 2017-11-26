@@ -1,5 +1,5 @@
-﻿class StoreCustomer {
+﻿//class StoreCustomer {
 
-    public visits: number = 1;
+//    public visits: number = 1;
      
-}
+//}

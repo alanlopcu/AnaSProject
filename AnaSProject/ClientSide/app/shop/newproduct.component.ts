@@ -20,11 +20,17 @@ export class NewProduct {
     };
 
     onInsert() {
-        this.data.insertProduct(this.prod)
-            .subscribe(success => {
-                if (success) {
-                    this.router.navigate(["/"]);
-                }
-            }, err => this.errorMessage = "Failed to insert product!");
+        if (this.data.getMemoryStorageState()) {
+            this.data.addProduct(this.prod);
+            this.router.navigate(["/"]);
+        }
+        else {
+            this.data.insertProduct(this.prod)
+                .subscribe(success => {
+                    if (success) {
+                        this.router.navigate(["/"]);
+                    }
+                }, err => this.errorMessage = "Failed to insert product!");
+        }
     }
 }

@@ -1,28 +1,24 @@
-﻿//import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+﻿import { Injectable } from "@angular/core";
 import { Http, Response, Headers } from "@angular/http";
 import { Observable } from "rxjs"
 import 'rxjs/add/operator/map';
 import { Product } from "./product";
 import { Order, OrderItem } from "./order";
+import { PersistenceService, StorageType } from "angular-persistence";
 //import * as orders from "./order";//I dont need this for this assessment i guess...
 
 @Injectable()
 export class DataService {
 
-    constructor(private http: Http) { }
+    constructor(
+        private http: Http,
+        private persistenceService: PersistenceService
+    ) {
+    }
 
     public products: Product[] = [];
     public order: Order = new Order();
-    
-    //Using HttpClient ----> not ok
-    //loadProducts(): Observable<boolean> {
-    //return this.http.get("/api/products")
-    //    .map((data: any[]) => {
-    //    this.products = data;
-    //    return true;
-    //    });
-    //}
+    public perSwitch: boolean = this.persistenceService.get('perSwitch', StorageType.LOCAL);
 
     public loadProducts(): Observable<Product[]> {
         return this.http.get("/api/products")
@@ -48,13 +44,36 @@ export class DataService {
         }
     }
 
+    public addProduct(prod) {
+        this.products = this.persistenceService.get('productList', StorageType.LOCAL);//Clean DB product list & load my memory storage product list
+        this.products.push(prod);//add my new product
+        this.persistenceService.set('productList', this.products , { type: StorageType.LOCAL });//Memory & 'offline' storage
+    }
+
     public insertProduct(prod) {
         return this.http.post("/api/products", prod)
             .map(response => {
                 let message = response.json();
-                //alert(message.productId);
                 return true;
             });
+    }
+
+    public activateMemoryStorage() {
+        this.perSwitch = true;
+        this.persistenceService.set('perSwitch', true, { type: StorageType.LOCAL });//Memory & 'offline' storage
+    }
+
+    public deactivateMemoryStorage() {
+        this.perSwitch = false;
+        this.persistenceService.set('perSwitch', false, { type: StorageType.LOCAL });//Database storage
+    }
+
+    public getMemoryStorageState() {
+        return this.persistenceService.get('perSwitch', StorageType.LOCAL);
+    }
+
+    public getMemoryStorageProductList() {
+        return this.persistenceService.get('productList', StorageType.LOCAL);
     }
 
 }

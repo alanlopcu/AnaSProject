@@ -12,44 +12,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var dataService_1 = require("../shared/dataService");
 var router_1 = require("@angular/router");
-//import { Product } from "../shared/product";
 var NewProduct = (function () {
     function NewProduct(data, router) {
         this.data = data;
         this.router = router;
         this.errorMessage = "";
-        //public prod: Product = {
-        //    productId: null,
-        //    price: 0,
-        //    title: "",
-        //    description: "",
-        //    picture: "sana.png",
-        //    categoryId: 1
-        //};
-        //public prod = {
-        //    productId: null,
-        //    price: 0,
-        //    title: "",
-        //    description: "",
-        //    picture: "sana.png",
-        //    categoryId: 1
-        //};
         this.prod = {
             price: 0,
             title: "",
             description: "",
-            picture: "sana.png",
-            categoryId: 3
+            picture: "sana.png"
         };
     }
     NewProduct.prototype.onInsert = function () {
         var _this = this;
-        this.data.insertProduct(this.prod)
-            .subscribe(function (success) {
-            if (success) {
-                _this.router.navigate(["/"]);
-            }
-        }, function (err) { return _this.errorMessage = "Failed to insert product!"; });
+        if (this.data.getMemoryStorageState())
+            console.log("Memory storage activated. You can't write on database!");
+        else {
+            this.data.insertProduct(this.prod)
+                .subscribe(function (success) {
+                if (success) {
+                    _this.router.navigate(["/"]);
+                }
+            }, function (err) { return _this.errorMessage = "Failed to insert product!"; });
+        }
     };
     return NewProduct;
 }());

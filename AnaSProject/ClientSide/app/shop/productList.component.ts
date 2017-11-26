@@ -14,12 +14,17 @@ export class ProductList implements OnInit {
     public products: Product[] = [];
 
     ngOnInit(): void {
-        this.data.loadProducts()
-            .subscribe(success => {
-                if (success) {
-                    this.products = this.data.products;
-                }
-            });
+        if (this.data.getMemoryStorageState()) {
+            this.products = this.data.getMemoryStorageProductList();
+        }
+        else {
+            this.data.loadProducts()
+                .subscribe(success => {
+                    if (success) {
+                        this.products = this.data.products;
+                    }
+                });
+        }
     }
 
     addProduct(product: Product) {

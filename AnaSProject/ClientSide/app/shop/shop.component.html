@@ -4,6 +4,11 @@
     </div>
     <div class="col-md-4">
         <a routerLink="newproduct" class="btn btn-info btn-block">Add new product</a>
+        <div class="well well-sm" style="display:block">
+            <div *ngIf="errorMessage" class="alert alert-warning">{{ errorMessage }}</div>
+            <p>Memory storage:</p>
+            <ui-switch [(ngModel)]="msValue" (click)="storageSwClicked()"></ui-switch>
+        </div>
         <div class="well well-sm">
             <sana-cart></sana-cart>
         </div>

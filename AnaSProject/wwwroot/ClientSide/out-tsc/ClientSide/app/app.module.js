@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
-//import { HttpClientModule } from "@angular/common/http";
 var http_1 = require("@angular/http");
+//import { HttpClientModule } from "@angular/common/http";
 var app_component_1 = require("./app.component");
 var productList_component_1 = require("./shop/productList.component");
 var cart_component_1 = require("./shop/cart.component");
@@ -18,6 +18,8 @@ var newproduct_component_1 = require("./shop/newproduct.component");
 var dataService_1 = require("./shared/dataService");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
+var angular_persistence_1 = require("angular-persistence");
+var angular2_ui_switch_1 = require("angular2-ui-switch");
 var routes = [
     { path: "", component: shop_component_1.Shop },
     { path: "newproduct", component: newproduct_component_1.NewProduct }
@@ -40,6 +42,8 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             http_1.HttpModule,
             forms_1.FormsModule,
+            angular_persistence_1.PersistenceModule,
+            angular2_ui_switch_1.UiSwitchModule,
             router_1.RouterModule.forRoot(routes, {
                 useHash: true,
                 enableTracing: true

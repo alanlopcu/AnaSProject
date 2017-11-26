@@ -9,26 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//import { HttpClient } from "@angular/common/http";
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 var order_1 = require("./order");
+var angular_persistence_1 = require("angular-persistence");
 //import * as orders from "./order";//I dont need this for this assessment i guess...
 var DataService = (function () {
-    function DataService(http) {
+    function DataService(http, persistenceService) {
         this.http = http;
+        this.persistenceService = persistenceService;
         this.products = [];
         this.order = new order_1.Order();
+        this.perSwitch = this.persistenceService.get('perSwitch', angular_persistence_1.StorageType.LOCAL);
     }
-    //Using HttpClient ----> not ok
-    //loadProducts(): Observable<boolean> {
-    //return this.http.get("/api/products")
-    //    .map((data: any[]) => {
-    //    this.products = data;
-    //    return true;
-    //    });
-    //}
     DataService.prototype.loadProducts = function () {
         var _this = this;
         return this.http.get("/api/products")
@@ -56,15 +50,26 @@ var DataService = (function () {
         return this.http.post("/api/products", prod)
             .map(function (response) {
             var message = response.json();
-            //alert(message.productId);
             return true;
         });
+    };
+    DataService.prototype.activateMemoryStorage = function () {
+        this.perSwitch = true;
+        this.persistenceService.set('perSwitch', true, { type: angular_persistence_1.StorageType.LOCAL }); //Memory & 'offline' storage
+    };
+    DataService.prototype.deactivateMemoryStorage = function () {
+        this.perSwitch = false;
+        this.persistenceService.set('perSwitch', false, { type: angular_persistence_1.StorageType.LOCAL }); //Database storage
+    };
+    DataService.prototype.getMemoryStorageState = function () {
+        return this.persistenceService.get('perSwitch');
     };
     return DataService;
 }());
 DataService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http,
+        angular_persistence_1.PersistenceService])
 ], DataService);
 exports.DataService = DataService;
 //# sourceMappingURL=dataService.js.map

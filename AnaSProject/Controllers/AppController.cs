@@ -21,11 +21,6 @@ namespace AnaSProject.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult Shop()
         {
             return View();
@@ -54,6 +49,7 @@ namespace AnaSProject.Controllers
             return View();
         }
 
+        [HttpGet("about")]
         public IActionResult About()
         {
             return View();

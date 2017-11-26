@@ -1,9 +1,15 @@
-﻿export class Order{
+﻿import * as _ from "lodash";
+
+export class Order{
     customer: OrderCustomer;
-    orderDate: Date;
+    orderDate: Date = new Date();
     orderNumber: string;
-    items: OrderItem[];
+    items: Array<OrderItem> = new Array<OrderItem>();
     customerId: number;
+
+    get subtotal(): number {
+        return _.sum(_.map(this.items, i => i.unitPrice * i.quantity));
+    };
 }
 
 export class OrderItem {

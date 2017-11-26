@@ -1,8 +1,9 @@
 ﻿.product-info {
-    height: 250px;
+    height: 270px;
 }
     .product-info img {
         max-width: 100px;
+        max-height: 100px;
         float: left;
         margin: 0 2px;
         border: solid 1px black;
@@ -11,4 +12,11 @@
     .product-info .product-title {
         font-size: large;
         font-weight: bold;
+    }
+
+    .product-info button {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        margin-left: -50px;
     }

@@ -50,7 +50,6 @@ namespace AnaSProject
             {
                 app.UseExceptionHandler("/error");
             }
-            //app.UseDefaultFiles();
             app.UseStaticFiles();
 
             //MVC Route
@@ -58,12 +57,12 @@ namespace AnaSProject
             {
                 cfg.MapRoute("Default",
                     "{controller}/{action}/{id?}",
-                    new { controller = "App", Action = "Index" });
+                    new { controller = "App", Action = "Shop" });
             });
 
-            if (env.IsDevelopment())//This assessment environment at this point
+            if (env.IsDevelopment())//My assessment environment at this point
             {
-                //Seed my assessment data
+                //Seeding my assessment data
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var seeder = scope.ServiceProvider.GetService<AnaSSeeder>();

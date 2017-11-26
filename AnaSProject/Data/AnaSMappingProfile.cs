@@ -30,7 +30,8 @@ namespace AnaSProject.Data
                 .ReverseMap();
 
             CreateMap<Category, CategoryViewModel>()
-                .ReverseMap();
+                .ReverseMap()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 }

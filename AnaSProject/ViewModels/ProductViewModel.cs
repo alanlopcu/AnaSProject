@@ -7,7 +7,7 @@ namespace AnaSProject.ViewModels
         public int ProductId { get; set; }
         [Required]
         public decimal Price { get; set; }
-        [Required, MinLength(4)]
+        [Required, MinLength(5)]
         public string Title { get; set; }
         public string Description { get; set; }
         public string Picture { get; set; }

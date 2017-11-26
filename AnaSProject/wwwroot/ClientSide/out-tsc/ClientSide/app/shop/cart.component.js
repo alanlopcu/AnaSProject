@@ -21,7 +21,7 @@ Cart = __decorate([
     core_1.Component({
         selector: "sana-cart",
         templateUrl: "cart.component.html",
-        styleUrls: []
+        styleUrls: ["cart.component.css"]
     }),
     __metadata("design:paramtypes", [dataService_1.DataService])
 ], Cart);

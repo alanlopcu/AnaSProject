@@ -1,3 +1,23 @@
-﻿<div>
-     Sana Commerce Cart
+﻿<div class="my-cart">
+    <h5>My Sana Cart</h5>
+    <div>Subtotal: {{ data.order.subtotal | currency:"COP":true }}</div>
+    <div>No. Items: {{ data.order.items.length }}</div>
+    <table class="table table-condensed table-hover table-responsive">
+        <thead>
+            <tr>
+                <td>Product</td>
+                <td>#</td>
+                <td>$</td>
+                <td>Total</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let o of data.order.items">
+                <td>{{ o.productTitle }}</td>
+                <td>{{ o.quantity }}</td>
+                <td>{{ o.unitPrice | currency:"COP":true }}</td>
+                <td>{{ (o.unitPrice * o.quantity) | currency:"COP":true }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

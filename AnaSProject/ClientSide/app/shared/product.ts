@@ -4,4 +4,5 @@
     title: string;
     description: string;
     picture: string;
+    categoryId: number;
 }
